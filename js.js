@@ -3,13 +3,13 @@ let add = (a, b) => a+b;
 let sub = (a, b) => a-b;
 let divi = (a, b) => a/b ;
 let mult = (a, b) => a*b;
+let operations = 0;
 
 //choosing math function based on operator
 let operate = (op,a,b) => {
     const mathFunction = getMathFunction(op)
     return mathFunction(a, b)
 }
-    
                 /**
                  * Returns mathematical function dependend on the input parameter                 
                  */
@@ -29,13 +29,22 @@ function getMathFunction(op)  {
 
 }
 
-
 //declaration of constants for events
 const display = document.querySelector(".window");
 const buttons = document.getElementsByClassName("numbers");
 const ops = document.getElementsByClassName("operator");
 const equ = document.getElementById("=");
 const clear = document.getElementById("clear");
+const operat = document.querySelector(".operate")
+
+operat.addEventListener("click", () => {
+    if(operations>=1){
+        display.textContent = solve();
+        }
+    else{
+        operations++;
+    }
+})
 
 //on click events for "=" and "clear"
 equ.onclick = () => {
@@ -85,4 +94,5 @@ function solve(){
     let c = Number(help()[0]); //turning the seperated numbers from the help function(l. 74) into numbers and asigning them to a variable
     let d = Number(help()[1]);
     let sol = operate(oper,c,d); //giving the numbers and the operator to the operate function(l.8) and assigning it a variable
+    operations = 0;
     return sol;}
