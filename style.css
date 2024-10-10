@@ -5,29 +5,36 @@ body{
 
 .calcbody{
     background-color: #7e818d;
+    background-image: radial-gradient(#70727e, #7e818d, #727685);
     margin: auto;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
-    padding: 10px 20px 70px 20px;
+    padding: 40px 20px 85px 20px;
     height: 500px;
-    width: 450px;
+    width: 470px;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    box-shadow: -10px 7px #404450;
 }
 
 .window{
     background-color: #aade93;
-    font-size: 30px;
+    font-size: 40px;
     color: #394e30;
-    margin: 40px 20px 40px 20px;
+    margin: 50px 20px 50px 20px;
     padding: 5px;
-    min-height: 50px;
-    min-width: 430px;
+    min-height: 60px;
+    min-width: 425px;
+    max-height: 60px;
+    max-width: 425px;
     display: flex;
     align-items: center;
     justify-content: end;
+    box-shadow: -5px 7px inset;
+    text-shadow: -1px 0 #7da16c56, 0 1px #7da16c56, 1px 0 #7da16c56, 0 -1px #7da16c56;
+    background-image: radial-gradient(#aade93, #aade93, #94c57f);
 }
 
 .field{
@@ -56,11 +63,19 @@ body{
 button{
     width: 90px;
     height: 90px;
-    background-color: #b7c2d3;
     color:#2a2c33;
     font-size: 20px;
     border-radius: 10px;
     margin: 5px;
     justify-content: center;
     align-items: center;
+    box-shadow: -5px 5px;
+    border: none;
+    background-image: radial-gradient(#bcc8da, #b7c2d3, #adb8c9);
 }
+
+button:active {
+    background-color: #b7c2d3;;
+    box-shadow: -5px 5px inset;
+    transform: translateY(4px);
+  }

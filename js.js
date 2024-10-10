@@ -5,6 +5,7 @@ let divi = (a, b) => a/b ;
 let mult = (a, b) => a*b;
 let operations = 0;
 
+
 //choosing math function based on operator
 let operate = (op,a,b) => {
     const mathFunction = getMathFunction(op)
@@ -29,6 +30,17 @@ function getMathFunction(op)  {
 
 }
 
+function seeIfNext(){
+    solve();
+    if(next==undefined){
+        display.textContent = solve();
+    }
+    else{
+        display.textContent = solve() + " " + next + " ";
+        operations++
+    }
+}
+
 //declaration of constants for events
 const display = document.querySelector(".window");
 const buttons = document.getElementsByClassName("numbers");
@@ -38,8 +50,9 @@ const clear = document.getElementById("clear");
 const operat = document.querySelector(".operate")
 
 operat.addEventListener("click", () => {
+   
     if(operations>=1){
-        display.textContent = solve();
+        seeIfNext();
         }
     else{
         operations++;
@@ -48,10 +61,11 @@ operat.addEventListener("click", () => {
 
 //on click events for "=" and "clear"
 equ.onclick = () => {
-    display.textContent = solve();//showing the result of the solve function(l.81) on the display
+    seeIfNext();//showing the result of the solve function(l.81) on the display
 }
 clear.onclick = () => {
     display.textContent = "";//emptying the display
+    operations = 0;
 }
 
 //for loop to bring the numbers on the screen
@@ -87,6 +101,7 @@ for (let j = 0 ; j < ops.length ; j++){
  function help(){
     arr = document.getElementsByClassName("window")[0].innerText.split(" "); //seperating
     oper = arr[1]; //assigning a variable the operator
+    next = arr[3]    
     arr.splice(0,3, arr[0], arr[2]); //taking out the operator with index[1]
     return arr;}
 
