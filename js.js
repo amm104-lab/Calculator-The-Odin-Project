@@ -34,6 +34,8 @@ const numberButtons = document.getElementsByClassName("numbers");
 const ops = document.getElementsByClassName("operator");
 const equ = document.getElementById("=");
 const clearButton = document.getElementById("clear");
+const floatButton = document.querySelector(".btn")
+const rmvButton = document.querySelector(".back")
 
 //on click events for "=" and "clear"
 equ.onclick = () => {
@@ -47,6 +49,17 @@ clearButton.onclick = function () {
     clearDisplayContent()
 }
 
+floatButton.addEventListener("click", () => {
+    addFloat()
+}
+)
+
+rmvButton.addEventListener("click", () => {
+    globalDisplayContent = globalDisplayContent.substring(0, globalDisplayContent.length -1);
+    updateDisplay();
+}
+)
+
 function setDisplayResult(result) {
     globalDisplayContent = String(result)
     updateDisplay()        
@@ -57,8 +70,8 @@ function clearDisplayContent() {
     updateDisplay()        
 }
 
-function addNumber(additionContent) {
-    globalDisplayContent += additionContent   
+function addNumber(additionalContent) {
+    globalDisplayContent += additionalContent   
     updateDisplay()
 }
 
@@ -82,6 +95,22 @@ function containsOperator() {
     if( getContentParts(globalDisplayContent)[1] ) {
         return true
     } else {
+        return false
+    }
+}
+
+function addFloat(){
+    if(containsFloat()==false){
+        globalDisplayContent += ".";
+        updateDisplay()
+    }
+}
+
+function containsFloat(){
+    if(getContentParts(globalDisplayContent).includes(".")){
+        return true
+    }
+    else{
         return false
     }
 }
