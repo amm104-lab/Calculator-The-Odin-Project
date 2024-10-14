@@ -26,9 +26,7 @@ function getMathFunction(op)  {
         default:
             throw new Error("unknown function")
     }
-
 }
-
 
 //declaration of constants for events
 const display = document.querySelector(".window");
@@ -37,12 +35,10 @@ const ops = document.getElementsByClassName("operator");
 const equ = document.getElementById("=");
 const clearButton = document.getElementById("clear");
 
-
-
 //on click events for "=" and "clear"
 equ.onclick = () => {
     const result = solve()
-    if( result) {
+    if(result != null) {
       setDisplayResult(result)
     } 
 }
@@ -50,7 +46,6 @@ equ.onclick = () => {
 clearButton.onclick = function () {
     clearDisplayContent()
 }
-
 
 function setDisplayResult(result) {
     globalDisplayContent = String(result)
@@ -67,7 +62,6 @@ function addNumber(additionContent) {
     updateDisplay()
 }
 
-
 function addOperator(operator) {
     if( containsOperator()) {
         // we already have an operator so we want to solve the statement first and take the result as first operand
@@ -82,9 +76,7 @@ function addOperator(operator) {
         globalDisplayContent += " " + operator  + " "
         updateDisplay()
     }
-    
 }
-
 
 function containsOperator() {
     if( getContentParts(globalDisplayContent)[1] ) {
@@ -98,8 +90,6 @@ function updateDisplay() {
 // update html element
     display.textContent = globalDisplayContent;
 }
-
-
 
 //for loop to bring the numbers on the screen
 for (let i = 0 ; i < numberButtons.length ; i++){
@@ -126,11 +116,9 @@ for( let index = 0 ; index < ops.length ; index++) {
         };
 }
 
-
 function getContentParts(displayContent) {
     return displayContent.split(" "); //seperating
 }
-
 
 function solve(){
     const parts = getContentParts(globalDisplayContent)
@@ -141,5 +129,4 @@ function solve(){
         return operate(oper,firstOperand,secondOperand); //giving the numbers and the operator to the operate function(l.8) and assigning it a variable
     }
     return null
-    
 }
