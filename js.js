@@ -11,24 +11,22 @@ let operate = (op,a,b) => {
     const mathFunction = getMathFunction(op)
     return mathFunction(a, b)
 }
-
                 
 //Returns mathematical function dependend on the input parameter                                  
 function getMathFunction(op)  {
     switch (op) {
         case "+":
             return add            
-            case "-":
+        case "-":
             return sub            
-            case "x":
+        case "x":
             return mult            
-            case "/":
+        case "/":
             return divi            
         default:
             throw new Error("unknown function")
     }
 }
-
 
 //declaration of constants for events
 const display = document.querySelector(".window");
@@ -36,9 +34,59 @@ const numberButtons = document.getElementsByClassName("numbers");
 const ops = document.getElementsByClassName("operator");
 const equ = document.getElementById("=");
 const clearButton = document.getElementById("clear");
-const floatButton = document.querySelector(".btn")
-const rmvButton = document.querySelector(".back")
+const floatButton = document.querySelector(".btn");
+const rmvButton = document.querySelector(".back");
+const bod = document.querySelector("body");
 
+//keyboard support
+bod.addEventListener("keydown", (event) => {
+    console.log(event.key)
+    switch(event.key){
+        //numbers
+        case "0":
+            return numberButtons[0].click();
+        case "1" :
+            return numberButtons[1].click();
+        case "2" :
+            return numberButtons[2].click();
+        case "3" :
+            return numberButtons[3].click();
+        case "4" :
+            return numberButtons[4].click();
+        case "5" :
+            return numberButtons[5].click();
+        case "6" :
+            return numberButtons[6].click();
+        case "7" :
+            return numberButtons[7].click();
+        case "8" :
+            return numberButtons[8].click();
+        case "9" :
+            return numberButtons[9].click();
+
+        //operators
+        case "+" :
+            return ops[0].click();
+        case "-" :
+            return ops[1].click();
+        case "*" :
+            return ops[2].click();
+        case "/" :
+            return ops[3].click();
+        case ":" :
+            return ops[3].click();
+
+        //other buttons
+        case "Enter" :
+            return equ.click();
+        case "Backspace" :
+            return rmvButton.click();
+        case "Delete" :
+            return clearButton.click();
+        case "," :
+            return floatButton.click();
+    }
+})
 
 //onclick/Eventlisteners for euqal,clear,float and back buttons
 equ.onclick = () => {
@@ -60,41 +108,34 @@ floatButton.addEventListener("click", () => {
 rmvButton.addEventListener("click", () => {
     removeElement();
     updateDisplay();
-}
-)
-
+})
 
 //removes Elements after checking if whitespaces need to be removed too
 function removeElement() {
     if(globalDisplayContent.slice(-1) == " "){
         globalDisplayContent = globalDisplayContent.substring(0, globalDisplayContent.length -3);
-        }
-    else{
+    } else{
         globalDisplayContent = globalDisplayContent.substring(0, globalDisplayContent.length -1);
     }
 }
 
-
 //converts globalsDisplaycontent into string before updating the display to prevent numbers from slipping through and causing trouble later on
 function setDisplayResult(result) {
-    globalDisplayContent = String(result)
-    updateDisplay()        
+    globalDisplayContent = String(result);
+    updateDisplay();        
 }
-
 
 //sets globalDisplayContent to empty and updates the display
 function clearDisplayContent() {
-    globalDisplayContent = ""
-    updateDisplay()        
+    globalDisplayContent = "";
+    updateDisplay();        
 }
-
 
 //adds additionalContent to globalDisplayContent and updates the Display
 function addNumber(additionalContent) {
-    globalDisplayContent += additionalContent   
-    updateDisplay()
+    globalDisplayContent += additionalContent;   
+    updateDisplay();
 }
-
 
 //adds an operator if requirements are met
 function addOperator(operator) {
@@ -108,8 +149,7 @@ function addOperator(operator) {
         } else {
             //no result
         }
-    } 
-    else if(globalDisplayContent.slice(-1) != "") { //something has to be on the display if an operator is to be added
+    } else if(globalDisplayContent.slice(-1) != "") { //something has to be on the display if an operator is to be added
         globalDisplayContent += " " + operator  + " "
         updateDisplay()
     }
@@ -117,7 +157,7 @@ function addOperator(operator) {
 
 //checks if there is a second operand
 function containsTwoOperands(){
-    if( getContentParts(globalDisplayContent)[2] ) {
+    if( getContentParts(globalDisplayContent)[2]) {
         return true
     } else {
         return false
@@ -126,7 +166,7 @@ function containsTwoOperands(){
 
 //checks if there is an operator
 function containsOperator() {
-    if( getContentParts(globalDisplayContent)[1] ) {
+    if( getContentParts(globalDisplayContent)[1]) {
         return true
     } else {
         return false
@@ -148,8 +188,7 @@ function containsFloat(){
     let content = checkLast();
     if(content.includes(".")){
         return true
-    }
-    else{
+    } else{
         return false
     }
 }
@@ -168,14 +207,11 @@ function updateDisplay() {
 function checkStatus(){
     if(getContentParts(globalDisplayContent)[0]== ""){
         return 0;
-    }
-    else if(getContentParts(globalDisplayContent)[1]== undefined){
+    } else if(getContentParts(globalDisplayContent)[1]== undefined){
         return 0;
-    }
-    else if(getContentParts(globalDisplayContent)[2]== ""){
+    } else if(getContentParts(globalDisplayContent)[2]== ""){
         return 1;
-    }
-    else{
+    } else{
         return 2;
     }
 }
@@ -192,14 +228,11 @@ for( let index = 0 ; index < ops.length ; index++) {
         ops[index].onclick = () => {
             if(index === 0){
                 addOperator("+");
-            }
-            else if(index === 1){
+            } else if(index === 1){
                 addOperator("-");
-            }
-            else if(index === 2){
+            } else if(index === 2){
                 addOperator("x");
-            }
-            else{
+            } else{
                 addOperator("/");
             }        
         };
@@ -213,7 +246,7 @@ function getContentParts(displayContent) {
 //seperates the math equation into its parts and returns it to operate function
 function solve() {
     const parts = getContentParts(globalDisplayContent)
-    if( containsTwoOperands()) {
+    if(containsTwoOperands()) {
         const firstOperand = Number(parts[0]);
         const secondOperand = Number(parts[2]);
         const oper = parts[1]
